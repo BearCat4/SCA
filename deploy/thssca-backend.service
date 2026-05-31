@@ -1,0 +1,16 @@
+[Unit]
+Description=THSSCA Backend
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+WorkingDirectory=/opt/thssca
+EnvironmentFile=/etc/thssca/backend.env
+ExecStart=/usr/bin/java -jar /opt/thssca/app.jar
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/thssca/backend.log
+StandardError=append:/var/log/thssca/backend.log
+
+[Install]
+WantedBy=multi-user.target

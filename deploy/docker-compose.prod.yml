@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: thssca-postgres
+    environment:
+      POSTGRES_DB: sca
+      POSTGRES_USER: sca
+      POSTGRES_PASSWORD: sca
+    ports:
+      - "127.0.0.1:15432:5432"
+    volumes:
+      - thssca-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sca -d sca"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+volumes:
+  thssca-postgres-data:
