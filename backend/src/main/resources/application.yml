@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/sca}
+    username: ${SPRING_DATASOURCE_USERNAME:sca}
+    password: ${SPRING_DATASOURCE_PASSWORD:sca}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+  servlet:
+    multipart:
+      max-file-size: ${SCA_UPLOAD_MAX_FILE_SIZE:200MB}
+      max-request-size: ${SCA_UPLOAD_MAX_REQUEST_SIZE:220MB}
+
+sca:
+  security:
+    token-secret: ${SCA_TOKEN_SECRET:change-me-in-production}
+  scan:
+    trivy-bin: ${TRIVY_BIN:trivy}
+    work-dir: ${SCA_WORK_DIR:${java.io.tmpdir}/sca-work}
+    timeout-seconds: ${SCA_SCAN_TIMEOUT_SECONDS:600}
+    git-timeout-seconds: ${SCA_GIT_TIMEOUT_SECONDS:180}
+    git-max-attempts: ${SCA_GIT_MAX_ATTEMPTS:3}
+    repository-token: ${SCA_REPOSITORY_TOKEN:}
+    fail-on-critical: ${SCA_POLICY_FAIL_ON_CRITICAL:true}
+    fail-on-high: ${SCA_POLICY_FAIL_ON_HIGH:true}
+    forbidden-licenses: ${SCA_POLICY_FORBIDDEN_LICENSES:GPL,AGPL,LGPL}
+    dependency-timeout-seconds: ${SCA_DEPENDENCY_TIMEOUT_SECONDS:180}
+    skip-db-update: ${SCA_TRIVY_SKIP_DB_UPDATE:true}

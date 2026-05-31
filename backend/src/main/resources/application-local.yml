@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/sca;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  flyway:
+    enabled: false
+
+sca:
+  scan:
+    trivy-bin: ${TRIVY_BIN:/opt/homebrew/bin/trivy}
+    skip-db-update: ${SCA_TRIVY_SKIP_DB_UPDATE:false}
