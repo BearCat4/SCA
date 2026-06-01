@@ -43,6 +43,7 @@ public class CliTrivyScanner implements TrivyScanner {
         command.add("--timeout");
         command.add(properties.getTimeoutSeconds() + "s");
         command.add("--no-progress");
+        command.add("--list-all-pkgs");
         if (properties.isSkipDbUpdate()) {
             command.add("--skip-db-update");
             command.add("--skip-java-db-update");
